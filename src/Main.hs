@@ -3,10 +3,11 @@ module Main where
 import Cli.Input
 import Cli.Output
 
-import Lexer.Parser
+import qualified RpnExpression.Parser as RpnExpression
+import qualified Lexer.Parser as Lexer
 
 main :: IO ()
 main = do
     input <- welcome "Введите выражение:"
-    stripped = stripWhitespaces input 
-    writeMessage ("Инфиксное выражение: " ++ input)
+
+    writeMessage . RpnExpression.parse . Lexer.parseFromString $ input
