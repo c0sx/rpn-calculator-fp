@@ -4,10 +4,10 @@ import Cli.Input
 import Cli.Output
 
 import qualified RpnExpression.Parser as RpnExpression
-import qualified Lexer.Parser as Lexer
+import qualified Lexer.InfixTokens as Infix
 
 main :: IO ()
 main = do
     input <- welcome "Введите выражение:"
 
-    print . Lexer.parseFromString $ input
+    print . Infix.getTokens . Infix.createFromString $ input
