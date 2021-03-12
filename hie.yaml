@@ -2,3 +2,18 @@ cradle:
   cabal:
     - path: "src/Main.hs"
       component: "rpn-calculator-fp:exe:rpn-calculator-fp"
+
+    - path: "src/Calculator.InfixTokens.hs"
+      component: "rpn-calculator-fp:exe:rpn-calculator-fp"
+
+    - path: "src/Calculator.RpnExpression.hs"
+      component: "rpn-calculator-fp:exe:rpn-calculator-fp"
+
+    - path: "src/Calculator.SortingStation.hs"
+      component: "rpn-calculator-fp:exe:rpn-calculator-fp"
+
+    - path: "src/Cli.Input.hs"
+      component: "rpn-calculator-fp:exe:rpn-calculator-fp"
+
+    - path: "src/Cli.Output.hs"
+      component: "rpn-calculator-fp:exe:rpn-calculator-fp"

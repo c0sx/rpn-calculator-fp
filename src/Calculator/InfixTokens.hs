@@ -1,10 +1,10 @@
-module Lexer.InfixTokens (createFromString, getTokens) where 
+module Calculator.InfixTokens (InfixList, createFromString, getTokens) where 
 
 import Data.Char(isSpace, isNumber)
 import Data.List
 
 stripWhitespaces :: String -> String
-stripWhitespaces = filter (\ x -> not (isSpace x))
+stripWhitespaces = filter $ not . isSpace
 
 createFromString :: String -> InfixList
 createFromString = InfixList . stripWhitespaces

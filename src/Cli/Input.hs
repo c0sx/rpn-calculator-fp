@@ -1,8 +1,8 @@
 module Cli.Input (welcome) where
 
-import Cli.Output
+import Cli.Output as Output
 
 welcome :: String -> IO String
 welcome msg = do
-    writeMessage msg
+    Output.message msg
     getLine

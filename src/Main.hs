@@ -1,13 +1,14 @@
 module Main where
 
-import Cli.Input
-import Cli.Output
+import Cli.Input as Input
+import Cli.Output as Output
 
-import qualified RpnExpression.Parser as RpnExpression
-import qualified Lexer.InfixTokens as Infix
+import qualified Calculator.InfixTokens as Infix
+import qualified Calculator.RpnTokens as Rpn
+import qualified Calculator.SortingStation as Station
 
 main :: IO ()
 main = do
-    input <- welcome "Введите выражение:"
+    input <- Input.welcome "Введите выражение:"
 
-    print . Infix.getTokens . Infix.createFromString $ input
+    Output.tokens . Rpn.getTokens . Station.sort . Infix.createFromString $ input

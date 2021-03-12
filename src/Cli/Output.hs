@@ -1,4 +1,7 @@
-module Cli.Output (writeMessage) where 
+module Cli.Output (message, tokens) where 
 
-writeMessage :: String -> IO ()
-writeMessage msg = putStrLn msg
+message :: String -> IO ()
+message = putStrLn
+
+tokens :: [String] -> IO ()
+tokens = message . unwords
