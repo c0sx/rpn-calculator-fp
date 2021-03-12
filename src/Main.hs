@@ -10,4 +10,4 @@ main :: IO ()
 main = do
     input <- welcome "Введите выражение:"
 
-    writeMessage . RpnExpression.parse . Lexer.parseFromString $ input
+    print . Lexer.parseFromString $ input

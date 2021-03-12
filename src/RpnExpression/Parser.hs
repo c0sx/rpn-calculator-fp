@@ -3,7 +3,9 @@ module RpnExpression.Parser (parse) where
 import Data.Char(isNumber)
 
 sortingStation :: String -> String
-sortingStation str = unwords (foldl processToken [] str)
+sortingStation str = 
+    let stack = []
+    in unwords (foldl processToken stack str)
 
 processToken :: [String] -> Char -> [String]
 processToken stack token
@@ -11,4 +13,4 @@ processToken stack token
     | otherwise = stack
 
 parse :: String -> String
-parse str = sortingStation $ str
+parse = sortingStation
