@@ -1,4 +1,4 @@
-module Calculator.Calculator where 
+module Calculator.Calculator (calculateFromString) where 
 
 import Calculator.Parser(parse)
 import Calculator.Tokenizer(tokenize, Token(..), toString)
@@ -18,4 +18,7 @@ calculate = head . foldl foldingFunction []
             foldingFunction (x:y:ys) Add = (x + y):ys  
             foldingFunction (x:y:ys) Subtract = (y - x):ys  
             foldingFunction (x:y:ys) Divide = (y / x):ys
-            foldingFunction xs value = (read (toString value) :: Double):xs 
+            foldingFunction xs value = tokenToDouble value:xs 
+
+tokenToDouble :: Token -> Double
+tokenToDouble token = read (toString token) :: Double

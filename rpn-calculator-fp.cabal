@@ -17,10 +17,14 @@ cabal-version:       >=1.10
 
 executable rpn-calculator-fp
   main-is:             Main.hs
-  -- other-modules:       Calculator.Parser, 
-  --                      Calculator.SortingStation, 
-  --                      Cli.Input, 
-  --                      Cli.Output
+  other-modules:       
+        Calculator.Calculation
+        Calculator.Calculator
+        Calculator.Parser
+        Calculator.SortingStation
+        Calculator.Tokenizer
+        Cli.Input
+        Cli.Output
   -- other-extensions:
   build-depends:       base >=4.8
   hs-source-dirs:      src
