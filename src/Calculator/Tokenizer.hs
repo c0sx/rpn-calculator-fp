@@ -1,23 +1,33 @@
-module Calculator.Tokenizer (fromInfixTokens, Token(..)) where 
+module Calculator.Tokenizer (tokenize, Token(..), toString) where 
 
 import Data.Char(isNumber)
 
-data Token = Number Int | ParenOpen | ParenClose | AddOp | MulOp  | DivOp | SubOp 
+data Token = Number Int | OpenBracket | CloseBracket | Add | Multiply | Divide | Subtract 
     deriving (Show, Eq)
 
-fromInfixTokens :: [String] -> [Token]
-fromInfixTokens = map mapToken
+tokenize :: [String] -> [Token]
+tokenize = map mapToken
 
 mapToken :: String -> Token
-mapToken "+" = AddOp
-mapToken "-" = SubOp
-mapToken "*" = MulOp
-mapToken "/" = DivOp
-mapToken "(" = ParenOpen
-mapToken ")" = ParenClose
+mapToken "+" = Add
+mapToken "-" = Subtract
+mapToken "*" = Multiply
+mapToken "/" = Divide
+mapToken "(" = OpenBracket
+mapToken ")" = CloseBracket
 mapToken s
     | isNumeric s = Number (read s :: Int)
     | otherwise = error "Недопустимый токен"
 
 isNumeric :: String -> Bool
 isNumeric = all isNumber
+    
+toString :: Token -> String
+toString = toStringOne where
+    toStringOne (Number n) = show n
+    toStringOne Add = "+"
+    toStringOne Multiply = "*"
+    toStringOne Divide = "/"
+    toStringOne Subtract = "-"
+    toStringOne OpenBracket = "("
+    toStringOne CloseBracket = ")"

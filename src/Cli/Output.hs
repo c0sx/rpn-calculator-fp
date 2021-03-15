@@ -1,22 +1,18 @@
-module Cli.Output (message, tokens) where 
+module Cli.Output (message, showCalculation) where 
 
-import Calculator.Tokenizer(Token(..))
+import Calculator.Tokenizer(Token(..), toString)
+import Calculator.Calculation(Calculation(..), getExpression, getValue)
 
 message :: String -> IO ()
 message = putStrLn
 
-tokens :: [Token] -> IO ()
-tokens = message .  toString
+showCalculation :: Calculation -> IO ()
+showCalculation result = 
+    let expression = stringify $ getExpression result
+        value = show $ getValue result
+    in do 
+        putStrLn expression
+        putStrLn value
 
-toString:: [Token] -> String
-toString tokens = unwords (map showToken tokens)
-
-showToken :: Token -> String
-showToken = toStringOne where
-    toStringOne (Number n) = show n
-    toStringOne AddOp = "+"
-    toStringOne MulOp = "*"
-    toStringOne DivOp = "/"
-    toStringOne SubOp = "-"
-    toStringOne ParenOpen = "("
-    toStringOne ParenClose = ")"
+stringify:: [Token] -> String
+stringify tokens = unwords (map toString tokens)

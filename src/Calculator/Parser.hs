@@ -1,22 +1,22 @@
-module Calculator.InfixTokens (createFromString) where 
+module Calculator.Parser (parse) where 
 
 import Data.Char(isSpace, isNumber)
 
-createFromString :: String -> [String]
-createFromString = tokenize . stripWhitespaces
+parse :: String -> [String]
+parse = parse' . stripWhitespaces
 
 stripWhitespaces :: String -> String
 stripWhitespaces = filter $ not . isSpace
 
-tokenize :: String -> [String]
-tokenize [] = []
-tokenize (x:xs) 
+parse' :: String -> [String]
+parse' [] = []
+parse' (x:xs) 
     | isNumber x = 
         let token = x : nextToken xs
             start = length token - 1
             end = length xs
-        in token : tokenize (substring start end xs)
-    | otherwise = [x] : tokenize xs
+        in token : parse' (substring start end xs)
+    | otherwise = [x] : parse' xs
 
 nextToken :: String -> String
 nextToken [] = []
