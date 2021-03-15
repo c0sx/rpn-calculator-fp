@@ -1,6 +1,6 @@
-module Cli.Input (welcome) where
+module App.Cli.Input (welcome) where
 
-import Cli.Output(message)
+import App.Cli.Output(message)
 
 welcome :: String -> IO String
 welcome msg = do

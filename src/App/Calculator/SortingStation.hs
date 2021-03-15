@@ -1,8 +1,8 @@
-module Calculator.SortingStation (transform) where 
+module App.Calculator.SortingStation (transform) where 
 
 import Data.Char(isNumber)
 
-import Calculator.Tokenizer(Token(..))
+import App.Calculator.Tokenizer(Token(..))
 
 isOperator:: Token -> Bool
 isOperator Add = True

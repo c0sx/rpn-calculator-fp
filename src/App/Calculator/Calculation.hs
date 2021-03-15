@@ -1,6 +1,6 @@
-module Calculator.Calculation (Calculation(..), getExpression, getValue) where
+module App.Calculator.Calculation (Calculation(..), getExpression, getValue) where
 
-import Calculator.Tokenizer(Token)
+import App.Calculator.Tokenizer(Token)
 
 data Calculation = Calculation [Token] Double
 

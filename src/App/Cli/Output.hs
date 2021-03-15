@@ -1,7 +1,7 @@
-module Cli.Output (message, showCalculation) where 
+module App.Cli.Output (message, showCalculation) where 
 
-import Calculator.Tokenizer(Token(..), toString)
-import Calculator.Calculation(Calculation(..), getExpression, getValue)
+import App.Calculator.Tokenizer(Token(..), toString)
+import App.Calculator.Calculation(Calculation(..), getExpression, getValue)
 
 message :: String -> IO ()
 message = putStrLn

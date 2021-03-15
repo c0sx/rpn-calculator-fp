@@ -1,4 +1,4 @@
-module Calculator.Tokenizer (tokenize, Token(..), toString) where 
+module App.Calculator.Tokenizer (tokenize, Token(..), toString) where 
 
 import Data.Char(isNumber)
 

@@ -1,8 +1,8 @@
 module Main where
 
-import Cli.Input(welcome)
-import Cli.Output(showCalculation)
-import Calculator.Calculator(calculateFromString)
+import App.Cli.Input(welcome)
+import App.Cli.Output(showCalculation)
+import App.Calculator.Calculator(calculateFromString)
 
 main :: IO ()
 main = do
