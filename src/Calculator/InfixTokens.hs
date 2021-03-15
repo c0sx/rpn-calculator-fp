@@ -1,21 +1,12 @@
-module Calculator.InfixTokens (InfixList, createFromString, getTokens) where 
+module Calculator.InfixTokens (createFromString) where 
 
 import Data.Char(isSpace, isNumber)
-import Data.List
+
+createFromString :: String -> [String]
+createFromString = tokenize . stripWhitespaces
 
 stripWhitespaces :: String -> String
 stripWhitespaces = filter $ not . isSpace
-
-createFromString :: String -> InfixList
-createFromString = InfixList . stripWhitespaces
-
-newtype InfixList = InfixList String
-
-value :: InfixList -> String
-value (InfixList value) = value
-
-getTokens :: InfixList -> [String]
-getTokens = tokenize . value
 
 tokenize :: String -> [String]
 tokenize [] = []

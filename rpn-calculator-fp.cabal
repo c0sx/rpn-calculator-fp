@@ -18,7 +18,6 @@ cabal-version:       >=1.10
 executable rpn-calculator-fp
   main-is:             Main.hs
   other-modules:       Calculator.InfixTokens, 
-                       Calculator.RpnTokens, 
                        Calculator.SortingStation, 
                        Cli.Input, 
                        Cli.Output
