@@ -4,22 +4,6 @@ import Data.Char(isNumber)
 
 import App.Calculator.Tokenizer(Token(..))
 
-isOperator:: Token -> Bool
-isOperator Add = True
-isOperator Multiply = True
-isOperator Divide = True
-isOperator Subtract = True
-isOperator _ = False
-
-priority:: Token -> Int
-priority Add = 0
-priority Subtract = 0
-priority Multiply = 1
-priority Divide = 1
-priority OpenBracket = 2
-priority CloseBracket = 2
-priority (Number _) = 3
-
 transform :: [Token] -> [Token]
 transform tokens = transform' tokens [] [] where 
     transform' [] [] q = q
@@ -37,4 +21,20 @@ transform tokens = transform' tokens [] [] where
             cond o2 = isOperator o2 && (priority o1 < priority o2)
             spl = span cond s
             s1 = o1 : snd spl
-            q1 = q ++ fst spl
+            q1 = q ++ fst spl 
+             
+            isOperator:: Token -> Bool
+            isOperator Add = True
+            isOperator Multiply = True
+            isOperator Divide = True
+            isOperator Subtract = True
+            isOperator _ = False
+
+            priority:: Token -> Int
+            priority Add = 0
+            priority Subtract = 0
+            priority Multiply = 1
+            priority Divide = 1
+            priority OpenBracket = 2
+            priority CloseBracket = 2
+            priority (Number _) = 3

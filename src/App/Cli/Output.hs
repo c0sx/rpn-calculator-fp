@@ -7,12 +7,10 @@ message :: String -> IO ()
 message = putStrLn
 
 showCalculation :: Calculation -> IO ()
-showCalculation result = 
-    let expression = stringify $ getExpression result
-        value = show $ getValue result
-    in do 
-        putStrLn expression
-        putStrLn value
-
-stringify:: [Token] -> String
-stringify tokens = unwords (map toString tokens)
+showCalculation result = do 
+    putStrLn expression
+    putStrLn value where
+        value = show $ getValue result 
+        expression = stringify $ getExpression result where
+            stringify:: [Token] -> String
+            stringify tokens = unwords (map toString tokens)
