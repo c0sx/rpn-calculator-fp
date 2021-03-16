@@ -20,7 +20,11 @@ mapToken s
     | otherwise = error "Недопустимый токен"
 
 isNumeric :: String -> Bool
-isNumeric = all isNumber
+isNumeric [] = False
+isNumeric (x:xs) 
+    | x == '-' || x == '+' = isNumeric xs
+    | isNumber x = all isNumber xs
+    | otherwise = False
     
 toString :: Token -> String
 toString = toStringOne where
