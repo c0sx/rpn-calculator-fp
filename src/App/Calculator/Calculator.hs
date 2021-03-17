@@ -1,15 +1,18 @@
 module App.Calculator.Calculator (calculateFromString) where 
 
+import Data.Either(Either(Right, Left))
 import Debug.Trace(trace)
-import Data.Maybe(fromMaybe)
 
 import App.Calculator.Parser(parse)
 import App.Calculator.Tokenizer(tokenize, Token(..), toString)
 import App.Calculator.SortingStation(transform)
 import App.Calculator.Calculation(Calculation(..))
 
-calculateFromString :: String -> Calculation
-calculateFromString input = calculate . transform . tokenize . parse $ input
+calculateFromString :: String -> Either String Calculation
+calculateFromString input = case transform . tokenize . parse $ input of 
+    Right tokens -> Right (calculate tokens)
+    Left err -> Left err
+        
 
 calculate :: [Token] -> Calculation
 calculate expression = Calculation expression value where 

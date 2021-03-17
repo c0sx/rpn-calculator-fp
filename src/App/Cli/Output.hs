@@ -1,4 +1,4 @@
-module App.Cli.Output (message, showCalculation) where 
+module App.Cli.Output (message, showCalculation, showError) where 
 
 import App.Calculator.Tokenizer(Token(..), toString)
 import App.Calculator.Calculation(Calculation(..), getExpression, getValue)
@@ -14,3 +14,7 @@ showCalculation result = do
         expression = stringify $ getExpression result where
             stringify :: [Token] -> String
             stringify tokens = unwords (map toString tokens)
+
+showError :: String -> IO ()
+showError err =
+    message ("Ошибка: " ++ err)

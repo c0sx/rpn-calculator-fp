@@ -1,15 +1,16 @@
 module App.Calculator.SortingStation (transform) where 
 
 import Data.Char(isNumber)
+import Data.Either(Either(Right, Left))
 
 import App.Calculator.Tokenizer(Token(..))
 
-transform :: [Token] -> [Token]
+transform :: [Token] -> Either String [Token]
 transform tokens = transform' tokens [] [] where 
-    transform' [] [] q = q
+    transform' [] [] q = Right q
     transform' [] s q =
         if head s == OpenBracket
-        then error "Синтаксическая ошибка"
+        then Left "Синтаксическая ошибка"
         else transform' [] (tail s) (q ++ [head s])
     transform' (x:xs) s q = case x of 
         Number n -> transform' xs s (q ++ [Number n])
