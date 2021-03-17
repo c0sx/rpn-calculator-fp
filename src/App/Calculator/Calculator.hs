@@ -1,7 +1,15 @@
-module App.Calculator.Calculator (calculate) where 
+module App.Calculator.Calculator (calculateFromString) where 
 
+import Debug.Trace(trace)
+import Data.Maybe(fromMaybe)
+
+import App.Calculator.Parser(parse)
+import App.Calculator.Tokenizer(tokenize, Token(..), toString)
+import App.Calculator.SortingStation(transform)
 import App.Calculator.Calculation(Calculation(..))
-import App.Calculator.Tokenizer(Token(..), toString)
+
+calculateFromString :: String -> Calculation
+calculateFromString input = calculate . transform . tokenize . parse $ input
 
 calculate :: [Token] -> Calculation
 calculate expression = Calculation expression value where 
