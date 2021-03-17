@@ -12,5 +12,5 @@ showCalculation result = do
     putStrLn value where
         value = show $ getValue result 
         expression = stringify $ getExpression result where
-            stringify:: [Token] -> String
+            stringify :: [Token] -> String
             stringify tokens = unwords (map toString tokens)
