@@ -7,22 +7,22 @@ import App.Calculator.Tokenizer(Token(..))
 
 transform :: [Token] -> Either String [Token]
 transform tokens = transform' tokens [] [] where 
-    transform' [] [] q = Right q
-    transform' [] s q =
-        if head s == OpenBracket
+    transform' [] [] queue = Right queue
+    transform' [] stack queue =
+        if head stack == OpenBracket
         then Left "Синтаксическая ошибка"
-        else transform' [] (tail s) (q ++ [head s])
-    transform' (x:xs) s q = case x of 
-        Number n -> transform' xs s (q ++ [Number n])
-        OpenBracket -> transform' xs (OpenBracket : s) q
-        CloseBracket -> transform' xs s0 q0 where
-            s0 = tail $ dropWhile (/= OpenBracket) s
-            q0 = q ++ takeWhile (/= OpenBracket) s
-        o1 -> transform' xs s1 q1 where
-            cond o2 = isOperator o2 && (priority o1 < priority o2)
-            spl = span cond s
-            s1 = o1 : snd spl
-            q1 = q ++ fst spl 
+        else transform' [] (tail stack) (queue ++ [head stack])
+    transform' (x:xs) stack queue = case x of 
+        Number n -> transform' xs stack (queue ++ [Number n])
+        OpenBracket -> transform' xs (OpenBracket : stack) queue
+        CloseBracket -> transform' xs stack0 queue0 where
+            stack0 = tail $ dropWhile (/= OpenBracket) stack
+            queue0 = queue ++ takeWhile (/= OpenBracket) stack
+        operator1 -> transform' xs stack1 queue1 where
+            cond operator2 = isOperator operator2 && (priority operator1 < priority operator2)
+            spl = span cond stack
+            stack1 = operator1 : snd spl
+            queue1 = queue ++ fst spl 
              
             isOperator:: Token -> Bool
             isOperator Add = True
